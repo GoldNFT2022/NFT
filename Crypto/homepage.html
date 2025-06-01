@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gold NFT - Discover Exclusive Digital Gold</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Import Inter font for a modern look */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f8f8; /* Light background */
+            color: #333;
+        }
+        /* Custom gold gradient for buttons and highlights */
+        .gradient-gold {
+            background: linear-gradient(90deg, #FFD700 0%, #FFA500 100%); /* Gold to Orange */
+        }
+        .text-gold {
+            background: linear-gradient(90deg, #FFD700 0%, #FFA500 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        /* Custom button styling for hover effects */
+        .btn-primary {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+        }
+        .allow{
+            min-height: 100px;
+        }
+        /* Custom CSS for mobile menu toggle */
+        @media (max-width: 767px) { /* Tailwind's 'md' breakpoint is 768px */
+            .mobile-menu-hidden {
+                display: none;
+            }
+            .mobile-menu-visible {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%; /* Position below the header */
+                left: 0;
+                width: 100%;
+                background-color: white;
+                box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+                padding: 1rem 0;
+                border-bottom-left-radius: 0.5rem;
+                border-bottom-right-radius: 0.5rem;
+            }
+            .mobile-menu-visible a {
+                padding: 0.75rem 1.5rem;
+                text-align: center;
+                width: 100%;
+                border-bottom: 1px solid #eee;
+            }
+            .mobile-menu-visible a:last-child {
+                border-bottom: none;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white opacity-100 shadow-sm py-4 px-6 md:px-12 lg:px-24 flex justify-between items-center fixed w-full z-[999] top-0">
+        <div class="flex items-center">
+            <img src="https://placehold.co/40x40/FFD700/FFFFFF?text=NFT" alt="Gold NFT Logo" class="h-10 w-10 mr-3 rounded-full shadow-md">
+            <a href="#" class="text-2xl font-extrabold text-gold">Gold NFT</a>
+        </div>
+        <nav id="main-nav" class="hidden md:flex space-x-12">
+            <a href="#hero" class="text-gray-700 hover:text-gold font-medium transition-colors duration-200">Home</a>
+            <a href="features.html" class="text-gray-700 hover:text-gold font-medium transition-colors duration-200">Features</a>
+            <a href="howitworks.html" class="text-gray-700 hover:text-gold font-medium transition-colors duration-200">How It Works</a>
+            <a href="GoldNft.html" class="text-gray-700 hover:text-gold font-medium transition-colors duration-200">Buy</a>
+        </nav>
+        <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+    </header>
+
+    <section id="hero" class="relative bg-gradient-to-br from-yellow-500 to-orange-600 text-white py-24 md:py-32 lg:py-40 flex items-center justify-center min-h-screen-75 pt-20">
+        <div class="container mx-auto px-6 text-center z-10">
+            <div class="allow"></div>
+            <h2 class="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-6 drop-shadow-lg">
+                Unlock the Future of <span class="text-yellow-200">Digital Gold</span>
+            </h2>
+            <p class="text-lg md:text-xl lg:text-2xl mb-10 max-w-3xl mx-auto opacity-90">
+                Experience exclusive, verifiable, and secure ownership of unique digital assets backed by the brilliance of gold.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                <a href="GoldNft.html" class="btn-primary gradient-gold text-gray-900 font-bold py-3 px-8 rounded-full text-lg shadow-xl hover:shadow-2xl">
+                    Explore Gold NFTs
+                </a>
+                <a href="features.html" class="bg-white text-blue-700 font-bold py-3 px-8 rounded-full text-lg shadow-xl hover:bg-gray-100 transition duration-300 ease-in-out transform hover:scale-105">
+                    Learn More
+                </a>
+            </div>
+        </div>
+        <div class="absolute inset-0 bg-black opacity-20"></div>
+    </section>
+
+    <section id="features" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">Why Choose <span class="text-gold">Gold NFT</span>?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1 border border-gray-100">
+                    <div class="text-gold text-5xl mb-4 text-center">✨</div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-3 text-center">Exclusive Collections</h3>
+                    <p class="text-gray-600 text-center">Discover rare and unique digital art pieces, each meticulously crafted and imbued with the essence of gold.</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1 border border-gray-100">
+                    <div class="text-gold text-5xl mb-4 text-center">🔒</div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-3 text-center">Secure Transactions</h3>
+                    <p class="text-gray-600 text-center">Leverage blockchain technology for transparent, secure, and immutable ownership records.</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1 border border-gray-100">
+                    <div class="text-gold text-5xl mb-4 text-center">💎</div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-3 text-center">Verifiable Authenticity</h3>
+                    <p class="text-gray-600 text-center">Every Gold NFT comes with verifiable proof of authenticity and provenance on the blockchain.</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1 border border-gray-100">
+                    <div class="text-gold text-5xl mb-4 text-center">🌐</div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-3 text-center">Global Marketplace</h3>
+                    <p class="text-gray-600 text-center">Access a vibrant global community of collectors and artists, trading digital gold assets.</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1 border border-gray-100">
+                    <div class="text-gold text-5xl mb-4 text-center">📈</div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-3 text-center">Investment Potential</h3>
+                    <p class="text-gray-600 text-center">Invest in digital assets with intrinsic value and potential for appreciation.</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1 border border-gray-100">
+                    <div class="text-gold text-5xl mb-4 text-center">🤝</div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-3 text-center">Vibrant Community</h3>
+                    <p class="text-gray-600 text-center">Join a passionate community of digital art enthusiasts and gold aficionados.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="py-16 md:py-24 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">How It <span class="text-gold">Works</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow-md border border-gray-100">
+                    <div class="gradient-gold w-16 h-16 flex items-center justify-center rounded-full text-white text-3xl font-bold mb-4 shadow-lg">1</div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Connect Your Wallet</h3>
+                    <p class="text-gray-600">Securely link your cryptocurrency wallet to access the marketplace.</p>
+                    <button onclick="window.location='GoldNft.html'"><u>Continue here</u></button>
+                </div>
+                <div class="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow-md border border-gray-100">
+                    <div class="gradient-gold w-16 h-16 flex items-center justify-center rounded-full text-white text-3xl font-bold mb-4 shadow-lg">2</div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Browse Collections</h3>
+                    <p class="text-gray-600">Explore our curated selection of exclusive Gold NFTs.</p>
+                </div>
+                <div class="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow-md border border-gray-100">
+                    <div class="gradient-gold w-16 h-16 flex items-center justify-center rounded-full text-white text-3xl font-bold mb-4 shadow-lg">3</div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Acquire Your NFT</h3>
+                    <p class="text-gray-600">Purchase your desired Gold NFT with ease and confidence.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="community" class="py-16 md:py-24 bg-gradient-to-br from-blue-600 to-purple-700 text-white text-center">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 drop-shadow">Join Our Golden Community</h2>
+            <p class="text-lg md:text-xl max-w-2xl mx-auto mb-10 opacity-90">
+                Be part of the pioneering community shaping the future of digital gold ownership. Get exclusive updates and early access.
+            </p>
+            <form class="max-w-xl mx-auto flex flex-col sm:flex-row gap-4">
+                <input
+                    type="email"
+                    placeholder="Enter your email address"
+                    class="flex-grow p-4 rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-300 focus:border-blue-300 text-gray-800 shadow-sm"
+                    required
+                />
+                <button
+                    type="submit"
+                    class="btn-primary gradient-gold text-gray-900 font-bold py-4 px-8 rounded-md shadow-xl hover:shadow-2xl"
+                >
+                    Subscribe Now
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-gray-300 py-10 px-6 md:px-12 lg:px-24 text-center">
+        <div class="container mx-auto">
+            <div class="mb-6">
+                <a href="#" class="text-2xl font-extrabold text-gold">Gold NFT</a>
+            </div>
+            <p class="mb-4">&copy; 2022 Gold NFT. All rights reserved.</p>
+            <div class="flex justify-center space-x-6">
+                <a href="privacy.html" class="text-gray-400 hover:text-white transition-colors duration-200">Privacy Policy</a>
+                <a href="terms.html" class="text-gray-400 hover:text-white transition-colors duration-200">Terms of Service</a>
+                <a href="https://mailto:cynthnoah100@gmail.com" class="text-gray-400 hover:text-white transition-colors duration-200">Contact Us</a>
+            </div>
+            <div class="mt-6 flex justify-center space-x-4">
+                <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-discord"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js" xintegrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mainNav = document.getElementById('main-nav');
+
+            // Function to toggle mobile menu visibility
+            const toggleMobileMenu = () => {
+                // Check if the screen width is less than 768px (Tailwind's 'md' breakpoint)
+                if (window.innerWidth < 768) {
+                    mainNav.classList.toggle('hidden'); // Toggles Tailwind's 'hidden' class
+                    mainNav.classList.toggle('mobile-menu-visible'); // Toggles custom mobile menu styling
+                }
+            };
+
+            // Add click event listener to the mobile menu button
+            mobileMenuButton.addEventListener('click', toggleMobileMenu);
+
+            // Close mobile menu if a navigation link is clicked (for smoother UX)
+            mainNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth < 768) {
+                        mainNav.classList.add('hidden');
+                        mainNav.classList.remove('mobile-menu-visible');
+                    }
+                });
+            });
+
+            // Handle window resize to ensure correct menu state
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 768) {
+                    // If desktop size, ensure nav is visible and mobile styles are removed
+                    mainNav.classList.remove('hidden', 'mobile-menu-visible');
+                    mainNav.classList.add('md:flex'); // Ensure flex display for desktop
+                } else {
+                    // If mobile size, ensure nav is hidden by default unless toggled
+                    mainNav.classList.add('hidden');
+                    mainNav.classList.remove('md:flex', 'mobile-menu-visible');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

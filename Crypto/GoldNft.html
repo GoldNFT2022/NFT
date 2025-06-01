@@ -1,0 +1,445 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gold Nft</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <style>
+        /* Apply Inter font globally and ensure full height */
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh; /* Ensure body takes at least full viewport height */
+            display: flex;
+            flex-direction: column;
+
+            justify-content: flex-start; /* Align items to the start (top) */
+            align-items: center;
+            background-color: #e2e8f0; /* Lighter grey background for a softer look */
+            padding: 2rem; /* More generous padding around the content */
+            box-sizing: border-box; /* Include padding in element's total width and height */
+        }
+
+        /* Custom button styles for a fancier look */
+        .fancy-button {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            background-image: linear-gradient(to right, var(--tw-gradient-stops));
+        }
+        .fancy-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+        .fancy-button:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .fancy-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+
+            transition: all 0.4s ease-in-out;
+            transform: skewX(-20deg);
+        }
+        .fancy-button:hover::before {
+            left: 100%;
+        }
+        .fancy-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .fancy-button:disabled::before {
+            left: -100%;
+        }
+
+        /* Specific style for transparent header buttons */
+        .header-button-transparent {
+            @apply px-4 py-2 rounded-lg text-sm font-semibold shadow-none 
+
+transition-all duration-300 ease-in-out;
+            background-color: transparent; /* Explicitly set transparent background */
+            border: 1px solid transparent; /* Start with transparent border */
+        }
+        .header-button-transparent:hover {
+            @apply bg-gray-100 border-gray-300; /* Subtle background and border on hover */
+        }
+        .header-button-transparent:focus {
+            @apply outline-none ring-2 ring-gray-300 ring-opacity-75;
+        }
+        .header-button-transparent:disabled {
+            @apply opacity-50 cursor-not-allowed;
+            background-color: transparent;
+            border-color: transparent;
+
+        }
+
+        /* Overlay styles for the alert */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000; /* Ensure it's on top of other content */
+            visibility: hidden; /* Hidden by default */
+            opacity: 0; /* Start fully transparent */
+
+            transition: visibility 0s, opacity 0.3s ease-in-out; /* Smooth transition */
+        }
+
+        .overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .alert-box {
+            background-color: #ffffff;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            transform: translateY(-20px); /* Start slightly above center */
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .overlay.active .alert-box {
+            transform: translateY(0); /* Slide into place */
+        }
+
+        .alert-box h3 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #334155;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Styling for the OK button inside the alert */
+        .alert-box button {
+            border-radius: 15px; /* Border radius */
+            width: 90px; /* Fixed width */
+
+            height: 40px; /* Fixed height */
+            font-size: 20px; /* Font size */
+            color: white; /* Text color */
+            background-color: #22c55e; /* Green background */
+            /* Removed default Tailwind padding/sizing to use fixed dimensions */
+            @apply font-semibold shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-75 transition duration-300 ease-in-out;
+            margin-top: 1rem;
+            display: inline-flex; /* Use flex to center content if needed */
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+
+    <div class="w-full max-w-4xl flex justify-between items-center mb-8">
+        <button id="backButton" onclick="window.location='./homepage.html'" class="header-button-transparent text-gray-700 hover:text-gray-900">
+            Back
+        </button>
+
+        <div id="profitLossContainer" class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-4 rounded-xl shadow-lg flex-grow mx-4 flex justify-center items-center transform transition-all duration-300 hover:scale-[1.01]">
+            <span class="text-2xl font-extrabold tracking-wide">Balance:</span>
+            <span id="totalProfitLossValue" class="text-3xl font-extrabold drop-
+
+shadow-md ml-3">0.00</span>
+        </div>
+
+        <button id="cashOutButton" class="header-button-transparent text-yellow-700 hover:text-yellow-900">
+            Cash Out
+        </button>
+    </div>
+
+    <div class="flex flex-col items-center w-full max-w-4xl space-y-6">
+
+        <div id="chartContainer" class="bg-white p-6 rounded-xl shadow-2xl w-full h-96 md:h-[450px] lg:h-[500px] border border-gray-200">
+            </div>
+
+        <div class="bg-white p-6 rounded-xl shadow-xl w-full flex flex-col items-
+
+center space-y-4 border border-gray-200">
+            <div class="flex space-x-6">
+                <button id="buyButton" class="fancy-button px-8 py-4 bg-gradient-to-r from-green-500 to-green-600 text-white font-bold text-lg rounded-xl shadow-lg hover:from-green-600 hover:to-green-700 focus:outline-none focus:ring-4 focus:ring-green-300">
+                    Buy
+                </button>
+                <button id="sellButton" class="fancy-button px-8 py-4 bg-gradient-to-r from-red-500 to-red-600 text-white font-bold text-lg rounded-xl shadow-lg hover:from-red-600 hover:to-red-700 focus:outline-none focus:ring-4 focus:ring-red-300">
+                    Sell
+
+                </button>
+            </div>
+            <div id="messageDisplay" class="text-lg font-medium text-gray-700 mt-4 text-center">
+                </div>
+        </div>
+    </div>
+
+    <div id="fundAccountOverlay" class="overlay">
+        <div class="alert-box">
+            <h3>Please fund your account before you can buy!</h3>
+            <button id="okButton">OK</button>
+        </div>
+    </div>
+
+    <script>
+        // Global variables to store the chart instance, last close price, and current date
+        var chart;
+        var lastClosePrice = 5000; // Initial price for the first candlestick
+        var currentDate = new Date(2012, 0, 1); // Starting date for the chart
+        var messageDisplay = document.getElementById('messageDisplay'); // Get the message display element
+        var profitLossValueDisplay = document.getElementById('totalProfitLossValue'); // Get the balance value display element
+        var fundAccountOverlay = document.getElementById('fundAccountOverlay'); // Get the overlay element
+        var okButton = document.getElementById('okButton'); // Get the OK button in the alert
+
+        // Trading state variables
+        var hasPosition = false; // True if the user currently holds a bought position
+        var buyPrice = 0;        // Stores the price at which the last buy order was placed
+        var balance = 0; // Tracks the total balance
+
+        /**
+         * Generates a single new candlestick data point with random values.
+         * The values are based on the last close price to simulate continuous movement.
+         * @returns {object} A data point object with x (Date) and y (Open, High, Low, Close).
+         */
+        function generateNewCandleData() {
+            // Increment the date for the new data point
+            currentDate.setDate(currentDate.getDate() + 1);
+
+            // Generate random fluctuations for open, high, low, and close prices
+            // Open price is a slight variation from the last close price
+            var open = lastClosePrice + (Math.random() - 0.5) * 50;
+            // Close price is a variation from the open price
+            var close = open + (Math.random() - 0.5) * 100;
+
+            // Determine high and low based on open and close, with additional random range
+            var high = Math.max(open, close) + Math.random() * 50;
+
+            var low = Math.min(open, close) - Math.random() * 50;
+
+            // Ensure prices don't go below a certain threshold (e.g., 1000)
+            open = Math.max(1000, open);
+            close = Math.max(1000, close);
+            high = Math.max(1000, high);
+            low = Math.max(1000, low);
+
+            // Update the last close price for the next iteration
+            lastClosePrice = close;
+
+            // Return the new data point
+            return {
+                x: new Date(currentDate), // Use a new Date object to avoid reference issues
+                y: [open, high, low, close]
+            };
+        }
+
+
+        /**
+         * Updates the balance display with the current total.
+         * Also saves the balance to local storage.
+         * Applies appropriate text color based on positive, negative, or zero balance.
+         */
+        function updateBalanceDisplay() {
+            profitLossValueDisplay.textContent = balance.toFixed(2);
+            // Remove previous color classes
+            profitLossValueDisplay.classList.remove('text-green-400', 'text-red-400', 'text-white');
+
+            // Apply new color class based on balance value
+
+            if (balance > 0) {
+                profitLossValueDisplay.classList.add('text-green-400'); /* Lighter green for contrast on blue background */
+            } else if (balance < 0) {
+                profitLossValueDisplay.classList.add('text-red-400'); /* Lighter red for contrast on blue background */
+            } else {
+                profitLossValueDisplay.classList.add('text-white'); /* White for zero on blue background */
+            }
+            // Save balance to local storage
+            localStorage.setItem('tradingBalance', balance.toFixed(2));
+        }
+
+
+        /**
+         * Shows the fund account overlay alert.
+         */
+        function showFundAccountAlert() {
+            fundAccountOverlay.classList.add('active');
+        }
+
+        /**
+         * Hides the fund account overlay alert.
+         */
+        function hideFundAccountAlert() {
+            fundAccountOverlay.classList.remove('active');
+        }
+
+
+        // This script initializes and renders the CanvasJS chart when the window loads.
+        window.onload = function () {
+            // Load balance from local storage on startup
+            var savedBalance = localStorage.getItem('tradingBalance');
+            if (savedBalance !== null) {
+                balance = parseFloat(savedBalance);
+            } else {
+                balance = 0; // Default if no balance is saved
+            }
+            updateBalanceDisplay(); // Update display with loaded or default balance
+
+            // Initialize the chart with initial data
+
+            chart = new CanvasJS.Chart("chartContainer",
+                {
+                    // Chart title configuration
+                    title: {
+                        text: "Stock Market Analysis",
+                        fontFamily: "Inter",
+                        fontWeight: "bold",
+                        fontSize: 28,
+                        padding: 15,
+                        fontColor: "#334155" /* Darker text for title */
+                    },
+                    // Enable zooming and panning on the chart
+                    zoomEnabled: true,
+                    // Configuration for the Y-axis (Prices)
+                    axisY: {
+                        includeZero: false,
+
+                        title: "Price ($)", /* More descriptive title */
+                        labelFontFamily: "Inter",
+                        titleFontFamily: "Inter",
+                        lineColor: "#cbd5e1", /* Lighter line color */
+                        tickColor: "#cbd5e1",
+                        gridColor: "#e2e8f0", /* Grid lines to match background */
+                        labelFontColor: "#475569" /* Darker labels */
+                    },
+                    // Configuration for the X-axis (Dates)
+                    axisX: {
+                        // Remove date labels by setting labelFormatter to return an empty string
+                        labelFormatter: function(e){
+                            return "";
+                        },
+
+                        // Keep other properties if needed for internal logic or spacing, but they won't render text
+                        interval: 2,
+                        intervalType: "month",
+                        lineColor: "#cbd5e1",
+                        tickColor: "#cbd5e1"
+                    },
+                    // Data series for the chart
+                    data: [
+                        {
+                            type: "candlestick",
+                            color: "#3b82f6",
+                            risingColor: "#22c55e", /* Green for rising */
+                            fallingColor: "#ef4444", /* Red for falling */
+                            dataPoints: [
+                                // Initial data points
+                                generateNewCandleData(),
+
+                                generateNewCandleData(),
+                                generateNewCandleData(),
+                                generateNewCandleData(),
+                                generateNewCandleData()
+                            ]
+                        }
+                    ]
+                });
+            // Render the initial chart
+            chart.render();
+
+            // Set up an interval to update the chart every 2 seconds
+            setInterval(function () {
+                var newDataPoint = generateNewCandleData();
+                
+
+chart.options.data[0].dataPoints.push(newDataPoint);
+
+                // Keep only the last 50 data points to maintain performance and viewability
+                if (chart.options.data[0].dataPoints.length > 50) {
+                    chart.options.data[0].dataPoints.shift();
+                }
+
+                chart.render();
+            }, 2000); // 2000 milliseconds = 2 seconds
+
+            // Get references to the buttons
+            var backButton = document.getElementById('backButton');
+            var cashOutButton = 
+
+document.getElementById('cashOutButton');
+            var buyButton = document.getElementById('buyButton');
+            var sellButton = document.getElementById('sellButton');
+
+            // Add click event listener for the Back button
+            backButton.addEventListener('click', function() {
+                messageDisplay.textContent = '⬅️ Back button clicked!';
+                // In a real application, you might use window.history.back() or navigate to another page
+                console.log('Back button clicked!');
+            });
+
+            // Add click event listener for the Cash Out button
+            cashOutButton.addEventListener('click', function() {
+                if (hasPosition) {
+                    messageDisplay.textContent = '⚠️ Cannot cash out with an open position. Sell first!';
+                } else {
+                    messageDisplay.textContent = '💸 Cashed out! Your balance of $' + balance.toFixed(2) + ' has been reset.';
+                    balance = 0; // Reset balance to zero
+                    updateBalanceDisplay(); // Update the display and save to local storage
+                    console.log('Cash Out button clicked! Balance reset.');
+                }
+
+            });
+
+            // Add click event listener for the Buy button
+            buyButton.addEventListener('click', function() {
+                // Show the alert instead of directly buying
+                showFundAccountAlert();
+            });
+
+            // Add click event listener for the Sell button
+            sellButton.addEventListener('click', function() {
+                if (hasPosition) {
+                    var sellPrice = lastClosePrice;
+                    var profit = sellPrice - buyPrice;
+
+                    balance += profit; // Add profit to balance
+                    hasPosition = false; // Reset position
+                    messageDisplay.textContent = '💰 SELL order placed at $' + sellPrice.toFixed(2) + '. P/L: $' + profit.toFixed(2);
+                    buyButton.disabled = false; // Enable buy button after selling
+                    sellButton.disabled = true; // Disable sell button
+                    cashOutButton.disabled = false; // Enable cash out after closing position
+                    updateBalanceDisplay(); // Update the balance display and save to local storage
+                    console.log('Sell button clicked! Price:', sellPrice, 'Profit:', profit);
+                } else {
+
+                    messageDisplay.textContent = '❌ No open position to sell. Buy first!';
+                }
+            });
+
+            // Add click event listener for the OK button in the alert
+            okButton.addEventListener('click', function() {
+                window.location="payments.html"; // Hide the alert when OK is clicked
+            });
+
+            // Initialize button states and balance display on load
+            buyButton.disabled = false;
+            sellButton.disabled = true;
+            cashOutButton.disabled = false; // Initially enabled if no position
+            // updateBalanceDisplay() is already called after loading balance.
+        }
+    </script>
+</body>
+</html>

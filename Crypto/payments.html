@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gold Nft Payment Gateway</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Apply Inter font globally and ensure full height */
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            background-color: #f0f2f5; /* Light grey background */
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+
+        /* Custom  button styling */
+        .-button {
+            @apply ml-3 px-3 py-1 bg-blue-500 text-white rounded-md text-xs font-semibold shadow-sm
+                   hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75
+                   transition duration-200 ease-in-out;
+        }
+        .-button.copied {
+            @apply bg-green-500;
+        }
+
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md border border-gray-200 text-center">
+        <h1 class="text-3xl font-extrabold text-gray-800 mb-6">Fund Your Account</h1>
+        <p class="text-gray-600 mb-8">Please use the details below to transfer funds to your Gold Nft account.</p>
+
+        <div class="space-y-6 text-left">
+            <div class="bg-gray-50 p-4 rounded-lg flex items-center justify-between shadow-sm">
+                <div>
+                    <p class="text-sm font-
+
+medium text-gray-500">Account Name:</p>
+                    <p id="accountName" class="text-lg font-semibold text-gray-900">Gold Nft</p>
+                </div>
+                <button class="-button" data--target="accountName"></button>
+            </div>
+
+            <div class="bg-gray-50 p-4 rounded-lg flex items-center justify-between shadow-sm">
+                <div>
+                    <p class="text-sm font-medium text-gray-500">Account Type:</p>
+                    <p id="accountType" class="text-lg font-semibold text-gray-900">Crypto Currency (USDT)</p>
+
+                </div>
+                <button class="-button" data--target="accountType"></button>
+            </div>
+
+            <div class="bg-gray-50 p-4 rounded-lg flex flex-col justify-between shadow-sm">
+                <p class="text-sm font-medium text-gray-500 mb-2">Transfer To:</p>
+                <div class="flex items-center">
+                    <p id="transferTo" class="text-base font-medium text-gray-900 break-all flex-grow">0xf5625341829313948c308c871441936dcb8d9fd0</p>
+                    <button class="-button ml-3" data--target="transferTo"></button>
+                </div>
+
+            </div>
+        </div>
+
+        <p id="Message" class="mt-6 text-sm text-green-600 opacity-0 transition-opacity duration-300">Copied!</p>
+
+        <button id="backToTradingButton" class="mt-8 px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-75 transition duration-300 ease-in-out">
+            Back to Trading
+        </button><br><br>
+        <a href="invalid.html" style="color: blue; text-decoration: underline;">I have sent it</a>
+    </div>
+
+    <script>
+        alert("Please ensure that you're aware that minimum deposit is 5000$")
+        document.addEventListener('DOMContentLoaded', function() {
+            const Buttons = document.querySelectorAll('.-button');
+            const Message = document.getElementById('Message');
+            const backToTradingButton = document.getElementById('backToTradingButton');
+
+            // Function to  text to clipboard
+            function TextToClipboard(text) {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.position = 'fixed'; // Prevent scrolling to bottom of page in 
+
+iOS.
+                textarea.style.opacity = 0; // Hide the textarea
+                document.body.appendChild(textarea);
+                textarea.focus();
+                textarea.select();
+                try {
+                    const successful = document.execCommand('');
+                    return successful;
+                } catch (err) {
+                    console.error('Failed to  text: ', err);
+                    return false;
+                } finally {
+                    document.body.removeChild(textarea);
+                }
+            }
+
+            // Add event listeners to all  buttons
+            Buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetId = this.dataset.Target;
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        const textTo = targetElement.textContent;
+                        const isCopied = TextToClipboard(textTo);
+
+                        if (isCopied) {
+                            // Show confirmation message
+                            Message.textContent = `Copied "${textTo}"!`;
+                            
+
+Message.classList.remove('opacity-0');
+                            Message.classList.add('opacity-100');
+
+                            // Briefly change button style
+                            this.classList.add('copied');
+                            const currentButton = this; // Capture 'this' for setTimeout
+                            setTimeout(() => {
+                                Message.classList.remove('opacity-100');
+                                Message.classList.add('opacity-0');
+                                currentButton.classList.remove('copied');
+                            }, 1500); // Hide message and revert button after 1.5 seconds
+
+                        } else {
+                            Message.textContent = 'Failed to !';
+                            Message.classList.remove('opacity-0');
+                            Message.classList.add('opacity-100', 'text-red-600');
+                            setTimeout(() => {
+                                Message.classList.remove('opacity-100', 'text-red-600');
+                                Message.classList.add('opacity-0');
+                            }, 2000);
+                        }
+                    }
+                });
+            });
+
+            // Optional: Add event listener for "Back to Trading" button
+            // In a real application, this would navigate back to the main trading chart page.
+            backToTradingButton.addEventListener('click', function() {
+                window.location="GoldNft.html"; // For demonstration
+                // Example: window.location.href = 'your_trading_chart_page.html';
+                // Or if using history: window.history.back();
+            });
+        });
+    </script>
+</body>
+</html>
