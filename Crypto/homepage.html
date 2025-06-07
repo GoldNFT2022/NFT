@@ -34,6 +34,28 @@
         .allow{
             min-height: 100px;
         }
+        .main-nav{
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 70px;
+            padding-top: 30px;
+            padding-left: 30px;
+            padding: 30px;
+            right: 0;
+            width: 200px;
+            color: black;
+            background: white;
+            z-index: 999;
+            border-radius: 0 0 0 30px;
+            transform: translateX(300px);
+            transition: all .4s ease-in;
+        }
+        .main-nav a{
+            padding-bottom: 30px;
+            font-size: 15px;
+            font-weight: bold;
+        }
         /* Custom CSS for mobile menu toggle */
         @media (max-width: 767px) { /* Tailwind's 'md' breakpoint is 768px */
             .mobile-menu-hidden {
@@ -65,25 +87,26 @@
     </style>
 </head>
 <body class="antialiased">
+    <button class="invincible" style="width: 50px; height: 50px; position: fixed; top: 10px; display: none; right: 10px; z-index: 9909;background-color: transparent; border: 1px solid black;" onclick="ose()"></button>
+        <nav class="main-nav">
+            <a href="#hero" class="text-gray-700 hover:text-gold font-medium transition-colors duration-200">Home</a>
+            <a href="features.html" class="text-gray-700 hover:text-gold font-medium transition-colors duration-200">Features</a>
+            <a href="howitworks.html" class="text-gray-700 hover:text-gold font-medium transition-colors duration-200">How It Works</a>
+            <a href="GoldNft.html" class="text-gray-700 hover:text-gold font-medium transition-colors duration-200">Buy</a>
+        </nav>
 
     <header class="bg-white opacity-100 shadow-sm py-4 px-6 md:px-12 lg:px-24 flex justify-between items-center fixed w-full z-[999] top-0">
         <div class="flex items-center">
             <img src="https://placehold.co/40x40/FFD700/FFFFFF?text=NFT" alt="Gold NFT Logo" class="h-10 w-10 mr-3 rounded-full shadow-md">
             <a href="#" class="text-2xl font-extrabold text-gold">Gold NFT</a>
         </div>
-        <nav id="main-nav" style="display: none; flex-direction: column; align-items: center;" class="hidden md:flex space-x-12">
-            <a href="#hero" style="text-align: center" class="text-gray-700 hover:text-gold font-medium transition-colors duration-200">Home</a>
-            <a href="features.html" style="text-align: center" class="text-gray-700 hover:text-gold font-medium transition-colors duration-200">Features</a>
-            <a href="howitworks.html" style="text-align: center" class="text-gray-700 hover:text-gold font-medium transition-colors duration-200">How It Works</a>
-            <a href="GoldNft.html" style="text-align: center" class="text-gray-700 hover:text-gold font-medium transition-colors duration-200">Buy</a>
-        </nav>
-        <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
+        <button onclick="transform()">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
             </svg>
         </button>
     </header>
-
+    
     <section id="hero" class="relative bg-gradient-to-br from-yellow-500 to-orange-600 text-white py-24 md:py-32 lg:py-40 flex items-center justify-center min-h-screen-75 pt-20">
         <div class="container mx-auto px-6 text-center z-10">
             <div class="allow"></div>
@@ -212,6 +235,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js" xintegrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script>
+        let transb = document.querySelector('.main-nav');
+        let invincible = document.querySelector('.invincible');
+        function transform(){
+            transb.style.transform = 'translateX(0)';
+            invincible.style.display = 'block';
+        };
+        function ose(){
+            transb.style.transform = 'translateX(300px)';
+            invincible.style.display = 'none';
+        };
         document.addEventListener('DOMContentLoaded', () => {
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mainNav = document.getElementById('main-nav');
