@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: Arial ;
+            transition: all 1.2s ease-in;
+        }
+        body{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form{
+            width: 350px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            border: 10px solid transparent;
+            box-shadow: 0px 0px 17px black;
+        }
+        .line1{
+            font-size: 40px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: left;
+            width: 100%;
+            margin-left: 20px;
+            margin-top: 20px;
+        }
+        .line2,.line3{
+            display: flex;
+            flex-direction: column;
+            font-size: 20px;
+        }
+        input{
+            width: 250px;
+            height: 40px;
+            border-radius: 5px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            padding-left: 10px;
+        }
+        button{
+            width: 250px;
+            height: 45px;
+            border-radius: 10px;
+            background: blue;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .line5{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+        }
+        a{
+            color: rgb(167, 0, 0);
+        }
+        @media (max-width: 600px) {
+            body{
+                transform: scale(0.8);
+            }
+        }
+    </style>
+    <link rel="icon" href="settings.svg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in</title>
+</head>
+<body>
+    <div class="form">
+        <div class="line1">
+            Log in
+        </div>
+        <div class="line2">
+            <span class="user">
+                <label for="">
+                    Email
+                </label>
+            </span>
+            <span class="email">
+                <input type="email" id="username" required/>
+            </span>
+        </div>
+        <div class="line3">
+            <span class="pass">
+                <label for="">
+                    Password
+                </label>
+            </span>
+            <span class="password">
+                <input type="password" id="password" required/>
+            </span>
+        </div>
+        <div class="line4">
+            <button id="logs">Log in</button>
+        </div>
+        <div class="line5">
+            <p>Dont have an account?&nbsp;</p><a href="signs.html">sign-up</a>
+        </div>
+    </div>
+<script>
+    let email = document.querySelector('input#username');
+    let password = document.querySelector('input#password');
+    let login = document.querySelector('#logs');
+    let savedemail = localStorage.getItem('email');
+    let savedname = localStorage.getItem('fullname');
+    let savedpass = localStorage.getItem('password');
+    login.addEventListener('click',()=>{
+        if( email.value == savedemail && password.value == savedpass ){
+            window.location = 'GoldNft.html';
+        }
+        else{
+            alert('unregistered user')
+        }
+    })
+</script>
+</body>
+</html>
