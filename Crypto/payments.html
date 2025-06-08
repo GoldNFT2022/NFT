@@ -45,7 +45,7 @@
                     <p class="text-sm font-
 
 medium text-gray-500">Account Name:</p>
-                    <p id="accountName" class="text-lg font-semibold text-gray-900">Gold Nft</p>
+                    <p id="accountName" class="text-lg font-semibold text-gray-900"><p id="nameo"></p></p>
                 </div>
                 <button class="-button" data--target="accountName"></button>
             </div>
@@ -78,6 +78,10 @@ medium text-gray-500">Account Name:</p>
     </div>
 
     <script>
+        let nameonscreen = document.getElementById('nameo');
+        window.addEventListener('load',()=>{
+            nameonscreen.innerHtml = localStorage.getItem('fullname');
+        });
         document.addEventListener('DOMContentLoaded', function() {
             const Buttons = document.querySelectorAll('.-button');
             const Message = document.getElementById('Message');
