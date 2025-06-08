@@ -45,7 +45,7 @@
                     <p class="text-sm font-
 
 medium text-gray-500">Account Name:</p>
-                    <p id="accountName" class="text-lg font-semibold text-gray-900"><p id="nameo"></p></p>
+                    <p id="accountName" class="text-lg font-semibold text-gray-900"></p>
                 </div>
                 <button class="-button" data--target="accountName"></button>
             </div>
@@ -78,7 +78,7 @@ medium text-gray-500">Account Name:</p>
     </div>
 
     <script>
-        let nameonscreen = document.getElementById('nameo');
+        let nameonscreen = document.getElementById('accountName');
         window.addEventListener('load',()=>{
             nameonscreen.innerHtml = localStorage.getItem('fullname');
         });
